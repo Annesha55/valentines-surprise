@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Songs That Remind Me of You 🎵</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+  <div class="frame">
+
+    <h1 class="title">
+      You remind me of<br>
+      <span>the color Blue</span>
+    </h1>
+
+    <div class="music-row">
+
+      <div class="song" onclick="playSong('song1')">
+        <img src="./images/pic10.jpg" loading="lazy">
+        <p>You’re the star I look for<br>every night ✨</p>
+        <audio id="song1" src="./music/song1.mp3"></audio>
+      </div>
+
+      <div class="song" onclick="playSong('song2')">
+        <img src="./images/pic14.jpg" loading="lazy">
+        <p>I see your eyes<br>look through my soul 💙</p>
+        <audio id="song2" src="./music/song2.mp3"></audio>
+      </div>
+
+      <div class="song" onclick="playSong('song3')">
+        <img src="./images/pic11.jpg" loading="lazy">
+        <p>You really love me<br>and I love you more 🤍</p>
+        <audio id="song3" src="./music/song3.mp3"></audio>
+      </div>
+
+    </div>
+
+    <div class="nav">
+      <a href="page2.html" class="back">← Back</a>
+      <span>page 3 of 4</span>
+      <a href="page4.html" class="more">I have more 💝</a>
+    </div>
+    
+    
+
+  </div>
+</div>
+
+<script>
+let currentSong = null;
+
+function playSong(id) {
+  const song = document.getElementById(id);
+
+  // Stop previous song
+  if (currentSong && currentSong !== song) {
+    currentSong.pause();
+    currentSong.currentTime = 0;
+  }
+
+  // Toggle play / pause
+  if (song.paused) {
+    song.play();
+    currentSong = song;
+  } else {
+    song.pause();
+  }
+}
+</script>
+
+</body>
+</html>
