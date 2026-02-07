@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💌</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="page-wrapper">
+  <div class="frame">
+    <h1 class="title">
+      You only deserve<br>
+      to be just <span>[ MINE ] 🔫</span>
+    </h1>
+
+    <div class="photo-row">
+      <img src="./images/pic1.jpg">
+      <img src="./images/pic2.jpg">
+      <img src="./images/pic9.jpg">
+    </div>
+
+    <h2 class="question">Will you be my Valentine? 💖</h2>
+
+    <div class="btns">
+      <button class="yes" onclick="celebrate()">Yes 💕</button>
+      <button class="no" onmouseover="moveNo()">No 💔</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let confetti = [];
+
+function randomColor() {
+  const colors = ["#ff4d6d", "#ffd6e0", "#ffffff", "#ffb3c6"];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function createConfetti() {
+  confetti = [];
+  for (let i = 0; i < 180; i++) {
+    confetti.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      r: Math.random() * 6 + 3,
+      d: Math.random() * 100,
+      color: randomColor()
+    });
+  }
+}
+
+function drawConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confetti.forEach(c => {
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+    ctx.fillStyle = c.color;
+    ctx.fill();
+    c.y += Math.cos(c.d) + 4;
+  });
+}
+
+function animateConfetti() {
+  drawConfetti();
+  requestAnimationFrame(animateConfetti);
+}
+
+function celebrate() {
+  createConfetti();
+  animateConfetti();
+  setTimeout(() => {
+    window.location.href = "page2.html";
+  }, 1500);
+}
+
+function moveNo() {
+  const btn = document.querySelector('.no');
+  const frame = document.querySelector('.frame');
+
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * (frame.clientWidth - btn.offsetWidth) + "px";
+  btn.style.top = Math.random() * (frame.clientHeight - btn.offsetHeight) + "px";
+}
+</script>
+
+</body>
+</html>
